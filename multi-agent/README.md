@@ -80,6 +80,7 @@ def create_agent(llm: ChatOpenAI, tools: list, system_prompt: str):
 取得當前的 state，將agent analysis resuly封裝成message，回傳給surpervisor
 ...
 傳輸第一種為agent 1(Analysis_1)時，只要分析origion_content(push)
+
 傳輸第二種為中間的agent(2以後)，要分析origion_content以及上一位agent分析內容
 ```
 # 獲取原始內容
@@ -143,5 +144,32 @@ supervisor_chain = (
     | llm.bind_functions(functions=[function_def], function_call="route")
     | JsonOutputFunctionsParser()
 )
+```
+角色prompt要求以及node、edge設定
+```
+research_agent = create_agent(llm, [tavily_tool], "You are a investor. Analyze the sentiment of the given financial content.")
+research_node = functools.partial(agent_node, agent=research_agent, name="Analysis_1")
+
+finance_sentiment_agent = create_agent(llm, [tavily_tool], "You are a financial sentiment analysis expert. Analyze the sentiment of the given financial content.")
+finance_sentiment_node = functools.partial(agent_node, agent=finance_sentiment_agent, name="Analysis_2")
+
+finance_sentiment_agent_3 = create_agent(llm, [tavily_tool], "You are a financial-advisor. Analyze the sentiment of the given financial content.")
+finance_sentiment_node_3 = functools.partial(agent_node, agent=finance_sentiment_agent, name="Analysis_final")
+
+workflow = StateGraph(AgentState)
+workflow.add_node("Analysis_1", research_node)
+workflow.add_node("Analysis_2", finance_sentiment_node)
+workflow.add_node("Analysis_final", finance_sentiment_node_3)
+# workflow.add_node("Coder", code_node)
+workflow.add_node("supervisor", supervisor_chain)
+
+for member in members:
+    workflow.add_edge(member, "supervisor")
+conditional_map = {k: k for k in members}
+conditional_map["FINISH"] = END
+workflow.add_conditional_edges("supervisor", lambda x: x["next"], conditional_map)
+workflow.add_edge(START, "supervisor")
+
+graph = workflow.compile()
 ```
 
