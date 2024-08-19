@@ -180,4 +180,34 @@ workflow.add_edge(START, "supervisor")
 
 graph = workflow.compile()
 ```
+輸出內容
+---
+### generate_content
+supervisor input
+![]
+supervisor humanmessage
 
+包含著原本content內容
+
+system控制
+![]
+
+analysis_1 input
+![]
+
+analysis_1 回傳humanmessage
+![]
+
+analysis_1 output
+![]
+
+analysis_final input
+![]
+analysis_final output
+![]
+### generate_push
+analysis_1 output
+![]
+
+analysis_final summary
+![]
