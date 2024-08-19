@@ -76,6 +76,36 @@ def create_agent(llm: ChatOpenAI, tools: list, system_prompt: str):
     executor = AgentExecutor(agent=agent, tools=tools)
     return executor
 ```
+### 定義代理(agent) 
+-取得當前的 state，將agent analysis resuly封裝成message，回傳給surpervisor
+...
+傳輸第一種為agent 1(Analysis_1)時，只要分析origion_content(push)
+傳輸第二種為中間的agent(2以後)，要分析origion_content以及上一位agent分析內容
+```
+# 獲取原始內容
+original_content = state.get("original_content", "")
+original_pushes = state.get("original_pushes", "")
+# 獲取之前的消息歷史
+all_messages = []
+previous_messages = state["messages"]
+all_messages += state["messages"]
+...
+ # 根據 agent 的角色構建新的輸入消息
+if name == "Analysis_1":         
+    new_message = HumanMessage(content=f"This is a content: {original_content}
+elif name == "Analysis_1":
+        previous_analysis = previous_messages[-1].content if previous_messages else ""
+        new_message = HumanMessage(content=f"Given the following original content,pushes and previous analysis,
+...
 
-
+ # 調用 agent
+result = agent.invoke(updated_state)
+    
+# 返回更新後的狀態
+return {
+    "messages": updated_state["messages"] + [HumanMessage(content=result["output"], name=name)],
+    "original_content": original_content,
+    "original_pushes": original_pushes
+    }
+```
 
