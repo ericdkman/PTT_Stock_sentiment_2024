@@ -37,8 +37,8 @@ from PyPtt import data_type
 from PyPtt import screens
 ```
 
-###確認環境參數設定
-###post_num設定抓取推文數
+### 確認環境參數設定
+### post_num設定抓取推文數
 ```
 if __name__ == '__main__':
     # 將id與pw存在.env中，透過此指令將環境變數引入
@@ -59,5 +59,4 @@ if __name__ == '__main__':
 ![image]
 - Pushes欄位中的資料  
 ![image]
-- 資料集可見 sentiment_analysis/dataset/ptt_stock_posts_num1.csv 
-
+- 資料集可見 sentiment_analysis/dataset/ptt_stock_posts_num1.csv
