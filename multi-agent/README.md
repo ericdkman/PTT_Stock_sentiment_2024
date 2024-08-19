@@ -77,7 +77,7 @@ def create_agent(llm: ChatOpenAI, tools: list, system_prompt: str):
     return executor
 ```
 ### 定義代理(agent) 
--取得當前的 state，將agent analysis resuly封裝成message，回傳給surpervisor
+取得當前的 state，將agent analysis resuly封裝成message，回傳給surpervisor
 ...
 傳輸第一種為agent 1(Analysis_1)時，只要分析origion_content(push)
 傳輸第二種為中間的agent(2以後)，要分析origion_content以及上一位agent分析內容
@@ -107,5 +107,41 @@ return {
     "original_content": original_content,
     "original_pushes": original_pushes
     }
+```
+### Agent-Supervisor建立
+建立Analysis_1、Analysis_2 和 Analysis_final三個節點
+並設立了system_prompt提醒Supervisor選擇操作流程(FINISH回報)
+```
+members = ["Analysis_1", "Analysis_2", "Analysis_final"]
+system_prompt = (
+    "You are a supervisor tasked with managing a conversation between the"
+    " following workers: {members}. Given the following user request,"
+    " respond with the worker to act next. Each worker will perform a"
+    " task and respond with their results and status. When finished,"
+    " respond with FINISH."
+options = ["FINISH"] + members
+)
+```
+生成問題詢問Supervisor，根據當前對話情境來決定下一步應由哪個工作節點執行，或是否應結束流程
+JsonOutputFunctionsParser 會將 LLM 的輸出解析為 JSON 格式，以便解析監督器的選擇結果
+```
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", system_prompt),
+        MessagesPlaceholder(variable_name="messages"),
+        (
+            "system",
+            "Given the conversation above, who should act next?"
+            " Or should we FINISH? Select one of: {options}",
+        ),
+    ]
+).partial(options=str(options), members=", ".join(members))
+
+llm = ChatOpenAI(model="gpt-4o")
+supervisor_chain = (
+    prompt
+    | llm.bind_functions(functions=[function_def], function_call="route")
+    | JsonOutputFunctionsParser()
+)
 ```
 
