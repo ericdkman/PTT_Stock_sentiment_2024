@@ -10,9 +10,12 @@ https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_s
 ```
 ### 概念
 ![image]
+https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
+透過AI-Langchain提供的方式，建立Graph去處理任務流程，可以靈活調動edge
 
-kkkkkkkkkkk
+Multi-agent是由多個自主代理（agents）組成的系統，各agent處理特定任務，並相互協作
 
+透過主管代理（supervisor agent）來管理任務進度以及流程，由supervisor管理各agent
 ### 程式碼
 ```
 pip install langchain-core langchain-openai langchain-community langchain-experimental langchain
