@@ -10,7 +10,8 @@ langchain-ai/langgraph的方式
 https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
 ```
 ### 概念
-![image]
+![image]](https://github.com/ericdkman/PTT_Stock_sentiment_2024_Sentiment_analysis/tree/main/multi-agent/螢幕擷取畫面 2024-08-19 230356.png)
+
 https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
 透過AI-Langchain提供的方式，建立Graph去處理任務流程，可以靈活調動edge
 
