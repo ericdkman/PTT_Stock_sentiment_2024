@@ -13,6 +13,7 @@ https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_s
 ![image](multi-agent/a.png)
 
 https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
+
 透過AI-Langchain提供的方式，建立Graph去處理任務流程，可以靈活調動edge
 
 Multi-agent是由多個自主代理（agents）組成的系統，各agent處理特定任務，並相互協作
