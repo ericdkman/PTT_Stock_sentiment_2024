@@ -2,7 +2,8 @@
 Description
 
 ---
-學習langchain-ai/langgraph的方式
+langchain-ai/langgraph的方式
+---
 實作multi_agent-agent_supervisor
 ---
 ```
@@ -21,7 +22,9 @@ Multi-agent是由多個自主代理（agents）組成的系統，各agent處理�
 pip install langchain-core langchain-openai langchain-community langchain-experimental langchain
 ```
 LangChain 是一個強大的框架，專門用來簡化和擴展自然語言處理（NLP）工作流程。它的主要目標是透過將不同的語言模型、工具和資源整合到一個統一的系統中，幫助開發者輕鬆構建和管理複雜的 NLP 應用。
+
 此外lanchain可與langsmith連接，並透過langsmith追蹤程式的運行流程
+
 (ex. 每個階段input、output)
 
 ### langchain_core
