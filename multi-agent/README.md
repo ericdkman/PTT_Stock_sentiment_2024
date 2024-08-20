@@ -188,26 +188,29 @@ supervisor input
 supervisor humanmessage
 
 包含著原本content內容
+![logo](result/2.png)
 
 system控制
-![]
+![logo](result/3.png)
 
 analysis_1 input
-![]
+![logo](result/4.png)
 
 analysis_1 回傳humanmessage
-![]
+![logo](result/6.png)
 
 analysis_1 output
-![]
+![logo](result/7.png)
 
 analysis_final input
-![]
+![logo](result/5.png)
 analysis_final output
-![]
+![logo](result/8.png)
 ### generate_push
 analysis_1 output
-![]
+![logo](result/10.png)
+human message
+![logo](result/11.png)
 
 analysis_final summary
-![]
+![logo](result/9.png)
