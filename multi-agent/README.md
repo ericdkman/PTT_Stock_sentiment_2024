@@ -183,11 +183,15 @@ graph = workflow.compile()
 輸出內容
 ---
 ### generate_content
+
 supervisor input
+
 ![logo](result/1.png)
+
 supervisor humanmessage
 
 包含著原本content內容
+
 ![logo](result/2.png)
 
 system控制
