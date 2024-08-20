@@ -184,7 +184,7 @@ graph = workflow.compile()
 ---
 ### generate_content
 supervisor input
-![]
+![logo](result/1.png)
 supervisor humanmessage
 
 包含著原本content內容
