@@ -10,7 +10,7 @@ langchain-ai/langgraph的方式
 https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
 ```
 ### 概念
-![logo](multi-agent/a.png)
+![logo](a.png)
 
 https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
 
